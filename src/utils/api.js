@@ -42,6 +42,12 @@ const PatientService = {
       return data;
     } catch (error) {}
   },
+  createPatient: async (patient) => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/patients`, patient);
+      return data;
+    } catch (error) {}
+  },
 };
 
 export { PatientService };

@@ -13,6 +13,7 @@ import Hospitals from "./Hospitals";
 import Physicians from "./Physicians";
 import Home from "./Home";
 import Appointments from "./Appointments";
+import AddPatientForm from "./AddPatientForm";
 
 const AppContentArea = ({ isOpen }) => {
   const sideBarWidth = isOpen ? "70px" : "250px";
@@ -54,6 +55,7 @@ const AppContentArea = ({ isOpen }) => {
             }}
           >
             <Patients />
+            <AddPatientForm />
             <Nurses />
             <Home />
             <Appointments />

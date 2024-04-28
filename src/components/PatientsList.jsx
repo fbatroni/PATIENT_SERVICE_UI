@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { PatientService } from "../utils/api";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, IconButton, Modal, Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const PatientsList = () => {
   const [patientData, setPatientData] = useState([]);
@@ -12,6 +14,7 @@ const PatientsList = () => {
   const [openViewModal, setOpenViewModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [patientToDelete, setPatientToDelete] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("use effect called");
@@ -26,7 +29,7 @@ const PatientsList = () => {
     };
 
     fetchPatients();
-  });
+  }, []);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -66,6 +69,9 @@ const PatientsList = () => {
     },
   ];
 
+  const handleAddPatient = () => {
+    navigate("/patients/add"); // Route to the patient intake form
+  };
   const handleViewPatient = async (patientId) => {
     try {
       const patientDetails = await PatientService.getPatientByPatientId(
@@ -75,6 +81,7 @@ const PatientsList = () => {
       setOpenViewModal(true);
     } catch (error) {
       console.log("error loading selected patient");
+      setOpenViewModal(false);
     }
   };
   const handleDeletePatient = (id) => {
@@ -95,6 +102,7 @@ const PatientsList = () => {
     } catch (error) {
       console.error("Failed to delete patient", error);
       setLoading(false);
+      setOpenDeleteModal(false);
     }
   };
 
@@ -131,6 +139,18 @@ const PatientsList = () => {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
+      <IconButton
+        color="primary"
+        aria-label="add patient"
+        component="span"
+        onClick={handleAddPatient}
+        style={{ position: "absolute", right: 0, top: 100 }}
+      >
+        <Typography id="patient-details-title" variant="h6" component="h2">
+          Add Patient
+        </Typography>
+        <AddCircleOutlineIcon />
+      </IconButton>
       <DataGrid
         rows={patientData}
         columns={columns}

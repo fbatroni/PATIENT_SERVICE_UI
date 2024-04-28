@@ -10,6 +10,7 @@ import Physicians from "./components/Physicians";
 import Nurses from "./components/Nurses";
 import Appointments from "./components/Appointments";
 import Home from "./components/Home";
+import AddPatientForm from "./components/AddPatientForm";
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,12 +26,13 @@ const App = () => {
         <AppContentArea isOpen={mobileOpen} />
       </Box>
       <Routes>
-        <Route path="/hospitals" element={<Hospitals />} />
-        <Route path="/patients" element={<Patients />} />
-        <Route path="/physicians" element={<Physicians />} />
-        <Route path="/nurses" element={<Nurses />} />
-        <Route path="/appointments" element={<Appointments />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/hospitals" element={Hospitals} />
+        <Route path="/patients" element={Patients} />
+        <Route path="/patients/add" element={AddPatientForm} />
+        <Route path="/physicians" element={Physicians} />
+        <Route path="/nurses" element={Nurses} />
+        <Route path="/appointments" element={Appointments} />
+        <Route path="/home" element={Home} />
       </Routes>
     </BrowserRouter>
   );
