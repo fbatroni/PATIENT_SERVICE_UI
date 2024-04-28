@@ -7,6 +7,13 @@ import {
   sideListWrapper,
 } from "@styles/styles";
 
+import Patients from "./Patients";
+import Nurses from "./Nurses";
+import Hospitals from "./Hospitals";
+import Physicians from "./Physicians";
+import Home from "./Home";
+import Appointments from "./Appointments";
+
 const AppContentArea = ({ isOpen }) => {
   const sideBarWidth = isOpen ? "70px" : "250px";
 
@@ -46,7 +53,12 @@ const AppContentArea = ({ isOpen }) => {
               width: `calc(100vw - ${sideBarWidth})`,
             }}
           >
-            &nbsp;
+            <Patients />
+            <Nurses />
+            <Home />
+            <Appointments />
+            <Physicians />
+            <Hospitals />
           </Box>
         </Box>
       </Box>

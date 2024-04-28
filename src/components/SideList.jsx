@@ -8,8 +8,15 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 const SideList = () => {
+  const navigate = useNavigate();
+  const handleOnClick = (event) => {
+    let route = event.target.textContent.toLowerCase();
+    navigate(route);
+  };
+
   return (
     <Box>
       {sideListItems.map((item) => {
@@ -49,7 +56,7 @@ const SideList = () => {
                   }}
                 >
                   <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={handleOnClick}>
                       <ListItemIcon>{item.icon}</ListItemIcon>
                       <ListItemText primary={item.text} />
                     </ListItemButton>
