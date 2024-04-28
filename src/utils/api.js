@@ -18,13 +18,30 @@ const PatientService = {
     return patientsList;
   },
   getPatientByPatientId: async (patientId) => {
-    const { data } = await axios.request({
-      url: `${BASE_URL}/patients/${patientId}`,
-    });
-
-    return data;
+    console.log("getPatientByPatientId:: ", patientId);
+    try {
+      const { data } = await axios.get(`${BASE_URL}/patients/${patientId}`);
+      return {
+        ...data,
+        full_name: data.first_name + " " + data.last_name,
+      };
+    } catch (error) {}
   },
-  updatePatient: (patient) => {},
+  updatePatient: async (patient) => {
+    try {
+      const { data } = await axios.patch(
+        `${BASE_URL}/patients/${patient.id}`,
+        patient
+      );
+      return data;
+    } catch (error) {}
+  },
+  deletePatient: async (patientId) => {
+    try {
+      const { data } = await axios.delete(`${BASE_URL}/patients/${patientId}`);
+      return data;
+    } catch (error) {}
+  },
 };
 
 export { PatientService };
